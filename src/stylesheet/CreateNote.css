@@ -1,83 +1,183 @@
-/* Ensures full height and centers content */
-.app-body {
-    margin: 0;
-    padding: 0;
-    height: 100vh; /* Full screen height */
+/* CreateNote.css */
+
+.create-note-page { /* Main container */
     display: flex;
-    align-items: center; /* Vertically center */
-    justify-content: center; /* Horizontally center */
-    background-color: #f5f5f5; /* Light background for better contrast */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center horizontally */
+    min-height: 900px; /* Full viewport height */
+    padding: 100px;
+    min-width:500px;
+    background-color: #4a90e2;
 }
 
-/* Note Creator Section */
+.note-creator-container h2 { /* Style the heading */
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
 .note-creator {
-    margin-top: 20px;
     display: flex;
-    flex-direction: row; /* Stack buttons and input vertically */
-    align-items: center; /* Center elements horizontally */
+    flex-direction: column; /* Stack title and buttons vertically */
+    align-items: center; /* Center horizontally */
+    width: 90%; /* Occupy most of the container width */
+    max-width: 900px; /* Set a maximum width */
+    margin-bottom: 20px; /* Space between title/buttons and textarea */
 }
 
-/* Buttons */
-.note-action-btn {
-    background: none;
-    border: none;
-    color: gray;
-    font-size: medium;
-    margin: 5px; /* Adds spacing between buttons */
-}
-
-.note-action-btn:hover {
-    background-color: rgb(105, 105, 105);
-    transition: 2s;
-}
-
-/* Title Input */
 .note-title-input {
-    font-size: 40px;
-    background: none;
-    border: none;
-    text-align: center; /* Centers text inside input */
-    width: 100%; /* Makes input responsive */
-    max-width: 500px; /* Prevents input from being too wide */
-    margin-left: 230px;
+    font-size: 2em; /* Larger title font */
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in width */
+    margin-bottom: 15px; /* Space between title and buttons */
 }
 
-.recorder
-{
-    background-color: rgb(255, 61, 100);
-    border: none;
-    width: 45px;
-    height: 40px;
-    border-radius: 5px;
-}
-.summarize
-{
-    width: 170px;
-    background-color: rgb(76, 139, 255);
-    border: none;
-    height: 20px;
-    color: white;
-    height: 40px;
-    border-radius: 5px;
-}
-.buttons
-{
-    width: 300px;
+.note-buttons {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: -15px;
-    margin-left: 100px
+    justify-content: space-around; /* Distribute buttons evenly */
+    width: 100%;
 }
-.textarea
-{
-    width: 1250px;
-    border-radius: 10px;
-    background-color: rgb(255, 255, 224);
-    font-size: 20px;
+
+.recorder,
+.summarize,
+.save {
+    padding: 12px 20px;
     border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
 }
-.link{
-    text-decoration: none;
+
+.recorder {
+    background-color: #ff4b4b; /* Red */
     color: white;
 }
+
+.recorder:hover {
+    background-color: #e53e3e; /* Darker red */
+}
+
+.summarize {
+    background-color: #4a90e2; /* Blue */
+    color: white;
+}
+
+.summarize:hover {
+    background-color: #357abf; /* Darker blue */
+}
+
+.save {
+    background-color: #007bff; /* Blue */
+    color: white;
+}
+
+.save:hover {
+    background-color: #0056b3; /* Darker blue */
+}
+
+
+.textarea {
+    width: 90%; /* Occupy most of the container width */
+    max-width: 900px; /* Set a maximum width */
+    height: 400px; /* Adjust height as needed */
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box; /* Include padding and border in width */
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.error,
+.loading {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.error {
+    color: red;
+}
+
+.loading {
+    color: gray;
+}
+
+/* Responsive Design (adjust as needed) */
+@media (max-width: 768px) {
+    .note-creator {
+        flex-direction: column; /* Stack elements vertically */
+    }
+
+    .note-buttons {
+        flex-direction: column; /* Stack buttons vertically */
+    }
+
+    .recorder,
+    .summarize,
+    .save {
+        width: 100%; /* Make buttons full width */
+        margin-bottom: 10px; /* Add space between buttons */
+    }
+}
+/* ... (Existing CSS) ... */
+
+/* Transitions */
+.create-note-page {
+    opacity: 0; /* Initially hidden */
+    transform: translateY(20px); /* Move down slightly */
+    animation: fadeInMoveUp 1s ease-in-out forwards; /* Apply animation */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+@keyframes fadeInMoveUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.note-creator {
+    transition: transform 0.3s ease; /* Smooth container transitions */
+}
+
+.note-creator:hover {
+    transform: scale(1.02); /* Scale up slightly on hover */
+}
+
+.note-title-input {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Input transitions */
+}
+
+.note-title-input:focus {
+    border-color: #3498db; /* Highlight border on focus */
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3); /* Blue glow on focus */
+}
+
+.recorder,
+.summarize,
+.save {
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Button transitions */
+}
+
+.recorder:hover,
+.summarize:hover,
+.save:hover {
+    transform: translateY(-2px); /* Move slightly up on hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+.textarea {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Textarea transitions */
+}
+
+.textarea:focus {
+    border-color: #3498db; /* Highlight border on focus */
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3); /* Blue glow on focus */
+}
+
+/* ... (Responsive Design) ... */

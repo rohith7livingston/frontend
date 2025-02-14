@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { FiMic } from "react-icons/fi";
 import "./../stylesheet/CreateNote.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = SpeechRecognition ? new SpeechRecognition() : null;
 
 const CreateNote = () => {
-  const[Title,settitle] = useState("")
+  const [Title, settitle] = useState("");
   const [detail, setDetail] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [listening, setListening] = useState(false);
+  const navigate = useNavigate();
 
-  // Summarize function
   const handleSummarize = async () => {
     if (detail.length < 20) {
       setError("Please enter at least 20 characters");
@@ -30,7 +31,10 @@ const CreateNote = () => {
         body: JSON.stringify({ text_to_summarize: detail }),
       });
 
-      if (!response.ok) throw new Error("Network response was not ok");
+      if (!response.ok) {
+        const errorData = await response.json(); // Try to parse error response
+        throw new Error(errorData.error || "Network response was not ok"); // Use error message from server, if available
+      }
 
       const summaryResponse = await response.text();
       setDetail(summaryResponse);
@@ -42,7 +46,6 @@ const CreateNote = () => {
     }
   };
 
-  // Toggle voice recording
   const toggleListening = () => {
     if (!recognition) {
       alert("Speech Recognition API not supported in your browser");
@@ -65,6 +68,7 @@ const CreateNote = () => {
       recognition.onerror = (event) => {
         console.error("Speech recognition error", event.error);
         setListening(false);
+        setError("Speech recognition error. Please check microphone permissions."); // More specific error message
       };
 
       recognition.onend = () => {
@@ -78,59 +82,66 @@ const CreateNote = () => {
 
   const handleSave = async () => {
     if (!Title || !detail) {
-        setError("Title and Note content are required!");
-        return;
+      setError("Title and Note content are required!");
+      return;
     }
 
     setError(null);
     setIsLoading(true);
 
     try {
-        const response = await fetch("http://localhost:3001/save-note", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-                title: Title, 
-                email: "hai@gadu.com",  // Use dynamic email if available
-                detail: detail
-            }),
-        });
+      const response = await fetch("http://localhost:3001/save-note", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: Title,
+          email: "hai@gadu.com",
+          detail: detail,
+        }),
+      });
 
-        const data = await response.json();
-        if (!response.ok) {
-            throw new Error(data.error || "Failed to save note");
-        }
+      if (!response.ok) {
+         const errorData = await response.json(); // Try to parse error response
+        throw new Error(errorData.error || "Failed to save note"); // Use error message from server, if available
+      }
 
-        console.log("Note saved:", data.note);
+      console.log("Note saved:");
+      navigate("/home"); // Redirect on successful save
     } catch (error) {
-        console.error("Error saving note:", error.message);
-        setError(error.message);
+      console.error("Error saving note:", error);
+      setError("Error saving note. Please try again."); // More generic error message
     } finally {
-        setIsLoading(false);
+      setIsLoading(false);
     }
-};
-
+  };
 
   return (
-    <div>
+    <div className="create-note-page">
+      <div className="note-creator-container">
+        <h2>CREATE NOTES</h2>
+      </div>
       <div className="note-creator">
-        <br />
-        <br />
-        <input type="text" placeholder="New Title" className="note-title-input" onChange={(e) => settitle(e.target.value)}/>
-        <div className="buttons">
-          {/* Voice Recorder Button */}
-          <button className={`recorder ${listening ? "recording" : ""}`} onClick={toggleListening}>
+        <input
+          type="text"
+          placeholder="New Title"
+          className="note-title-input"
+          onChange={(e) => settitle(e.target.value)}
+        />
+        <div className="note-buttons">
+          <button
+            className={`recorder ${listening ? "recording" : ""}`}
+            onClick={toggleListening}
+          >
             <FiMic size={20} color={listening ? "red" : "#fff"} />
           </button>
-
-          {/* Summarize Button */}
-          <button className="summarize" onClick={handleSummarize}>
-            AI Summarizer ✨
+          <button className="summarize" onClick={handleSummarize} disabled={isLoading}>
+            {isLoading ? "Summarizing..." : "AI Summarizer ✨"} {/* Show loading state */}
           </button>
-          <button className="save" onClick={handleSave}><Link to='/home' className="link">Save</Link></button>
+          <button className="save" onClick={handleSave} disabled={isLoading}>
+            {isLoading ? "Saving..." : "Save"} {/* Show loading state */}
+          </button>
         </div>
       </div>
-      <br />
       <textarea
         rows={28}
         className="textarea"

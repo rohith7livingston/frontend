@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
+import '../stylesheet/CollabEditor.css'; // Ensure this path is correct
 
 const socket = io('http://localhost:3001');
 
@@ -10,7 +11,7 @@ const CollabEditor = () => {
 
   useEffect(() => {
     socket.emit('joinNote', noteId);
-    
+
     socket.on('joinedRoom', (noteId) => {
       console.log(`Successfully joined room: ${noteId}`);
     });
@@ -32,9 +33,15 @@ const CollabEditor = () => {
   };
 
   return (
-    <div>
+    <div id="collaborative-editor-container">
       <h1>Collaborative Editor</h1>
-      <textarea value={content} onChange={handleContentChange} />
+      <div id="editor-content">
+        <textarea
+          value={content}
+          onChange={handleContentChange}
+          placeholder="Start typing to collaborate..."
+        />
+      </div>
     </div>
   );
 };

@@ -1,59 +1,51 @@
 /* General Page Styling */
-.Collab-check {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background: #f8f8f8;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 50vw;
+body {
+  font-family: sans-serif;
+  color: #333;
+  margin: 0;
+  /* display: flex; */
+  flex-direction: column; /* Main axis is vertical */
+  min-height: 100vh;
+  background-color:#4a90e2;
+}
+
+.header {
+  background-color: #f0f0f0;
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row; /* Align items horizontally */
+  flex-wrap: wrap; /* Allow wrapping if necessary */
+  justify-content: space-around; /* Distribute items evenly */
+  align-items: flex-start; /* Align items to top */
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.item {
+  width: 45%; /* Adjust as needed */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px; /* For when items stack */
+  box-sizing: border-box;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .item {
+      width: 90%; /* Stack vertically on smaller screens */
+      margin-bottom: 20px; /* Add margin between stacked items */
   }
-  
-  /* Join & Create sections */
-  .join, .create {
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 300px;
-  }
-  
-  /* Input Fields */
-  .input-box {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-  }
-  
-  /* Buttons */
-  .making {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background: #007bff;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .making:hover {
-    background: #0056b3;
-  }
-  
-  /* Notes Grid for Collaborative Notes */
-  .notes-grid {
-    margin-top: 20px;
-    padding: 20px;
-    background: #ffffe0;
-    border-radius: 10px;
-    min-height: 200px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}

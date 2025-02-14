@@ -69,8 +69,7 @@ const handleEdit = (note) => {
 };
 
 
-  if (loading) return <p>Loading notes...</p>;
-  if (error) return <p>Error: {error}</p>;
+
 
   return (
     <div className="app-container">

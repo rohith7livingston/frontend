@@ -1,21 +1,22 @@
 /* Home.css */
 :root {
-    --background: #fdf6ee;
-    --sidebar-bg: #f5eadd;
-    --primary-text: #4a4a4a;
-    --note-orange-dark: #eb7956;
-    --note-orange-light: #f8d1b3;
-    --note-yellow-dark: #e7b65b;
-    --note-yellow-light: #f4e1a1;
-    --border-radius: 16px;
-    --shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  --background: #f5f5f5; /* Light gray background (like your previous CSS) */
+  --sidebar-bg: #fff; /* White sidebar background */
+  --primary-text: #333; /* Dark gray text color */
+  --note-orange-dark: #007bff; /* Blue (like your buttons) */
+  --note-orange-light: #e3f2fd; /* Light blue */
+  --note-yellow-dark: #4a90e2; /* Slightly darker blue (summarize button) */
+  --note-yellow-light: #bbdefb; /* Lighter blue */
+  --border-radius: 8px; /* Consistent border radius */
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Similar shadow */
+}
   
   body {
     font-family: "Poppins", sans-serif;
     background-color: var(--background);
     margin: 0;
     padding: 0;
+    color: #4a90e2;
   }
   
   /* App Container */
@@ -70,7 +71,7 @@
     flex: 1;
     padding: 12px;
     border-radius: var(--border-radius);
-    border: 1px solid #ccc;
+    border: 1px solid #ffffff;
     outline: none;
     font-size: 16px;
   }

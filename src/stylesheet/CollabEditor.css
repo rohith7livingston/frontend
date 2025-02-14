@@ -1,0 +1,108 @@
+/* Global Styles */
+body {
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Soft blue gradient */
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  /* Container Styles */
+  #collaborative-editor-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInMoveUp 1s ease-in-out forwards;
+    max-width: 100vh;
+    width: 100vh;
+  }
+  
+  /* Entrance Animation */
+  @keyframes fadeInMoveUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Heading Styles */
+  #collaborative-editor-container h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  #collaborative-editor-container h1:hover {
+    transform: scale(1.05);
+    color: #3498db;
+  }
+  
+  /* Editor Content Styles */
+  #editor-content {
+    width: 100%;
+    background-color: #f9f9f9;
+    padding: 25px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  #editor-content:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Textarea Styles */
+  #editor-content textarea {
+    width: 100%;
+    min-height: 250px;
+    border: none;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    font-family: 'Roboto Mono', monospace;
+    resize: vertical;
+    outline: none;
+    box-sizing: border-box;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  #editor-content textarea:focus {
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.6); /* Blue glow on focus */
+  }
+  
+  /* Typewriter Effect on Placeholder */
+  #editor-content textarea::placeholder {
+    color: #aaa;
+    animation: typewriter 4s steps(40) infinite;
+  }
+  
+  @keyframes typewriter {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    #collaborative-editor-container {
+      padding: 20px;
+    }
+  }
+  
