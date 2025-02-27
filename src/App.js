@@ -14,7 +14,7 @@ function App() {
     <main id="app">
       <BrowserRouter>
         <Routes>
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Register />} />
           <Route path="/login" element={< Login/>} />
           <Route path="/home" element={< Home />} />
           <Route path="/create-note" element={< CreateNote/>} />
