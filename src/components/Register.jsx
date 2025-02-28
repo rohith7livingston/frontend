@@ -46,7 +46,7 @@ function Register() {
             }
         } catch (error) {
             console.error("Error:", error);
-            setError("Something went wrong. Try again!");
+            setError("The server is on high load Please try again later!");
         }
     };
 
